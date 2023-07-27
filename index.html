@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>CSS3 flexbox content positioning codility task</title>
+    <meta
+      name="description"
+      content="CSS3 flexbox positoning"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="solution.css"
+    />
+    <style>
+      body {
+        background: #3f4040;
+        width: 100%;
+        margin: 0;
+      }
+
+      .container {
+        overflow: auto;
+      }
+
+      .outer-centered {
+        margin: 5%;
+        height: 250px;
+        box-sizing: border-box;
+        flex: auto;
+        background: #fff;
+        text-align: center;
+      }
+
+      .outer-left {
+        width: 45%;
+        height: 250px;
+        box-sizing: border-box;
+        background: purple;
+        text-align: left;
+      }
+
+      .outer-right {
+        width: 35%;
+        height: 250px;
+        box-sizing: border-box;
+        background: green;
+        text-align: left;
+      }
+
+      .inner {
+        width: 300px;
+        height: 150px;
+      }
+      .outer-centered .inner {
+        border: 2px solid red;
+      }
+      .outer-left .inner {
+        border: 2px solid white;
+      }
+      .outer-right .inner {
+        border: 2px solid yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="outer-centered">
+        <div class="inner">
+          `outer-centered inner` elements (shown as red square boxes) should be
+          horizontally and vertically centered inside the parent `outer` (shown
+          as a white box). Their content (this text) should be also horizontally
+          and vertically centered inside the parent (red square box).
+        </div>
+      </div>
+      <div class="outer-centered">
+        <div class="inner">
+          `outer-centered inner` elements (shown as red square boxes) should be
+          horizontally and vertically centered inside the parent `outer` (shown
+          as a white box). Their content (this text) should be also horizontally
+          and vertically centered inside the parent (red square box).
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="outer-left">
+        <div class="inner">
+          `outer-left inner` element (shown as a white square box) should be
+          positioned on the left and bottom of the parent `outer` (shown as a
+          purple box). Its content (this text) should be aligned to the left
+          side and the bottom of the parent `inner` (white square box).
+        </div>
+      </div>
+      <div class="outer-right">
+        <div class="inner">
+          `outer-right inner` element (shown as a yellow square box) should be
+          positioned on the right and bottom of the parent `outer` (show as a
+          green box). Its content (this text) should be aligned to the right
+          side and the bottom of the parent `inner` (yellow square box).
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    function powerTwo(num) {
+      return num !== 0 && (num & (num - 1)) === 0
+    }
+
+    function solution(N) {
+      for (let i = 1; i <= N; i++) {
+        if (powerTwo(i)) {
+          console.log('POWER\n')
+        } else {
+          console.log(i + '\n')
+        }
+      }
+    }
+
+    function cheapLetterDeletion(L, C) {
+      const N = L.length
+      let total_cost = 0
+
+      for (let i = 1; i < N; i++) {
+        if (L[i] === L[i - 1]) {
+          total_cost += Math.min(C[i - 1], C[i])
+        }
+      }
+
+      return total_cost
+    }
+
+    function taskDescription(N) {
+      if (N === 0) return 0
+      if (N === 1) return 1
+
+      let prev1 = 1
+      let prev2 = 0
+
+      for (let i = 2; i <= N; i++) {
+        const next = (prev1 + prev2) % 10
+        prev2 = prev1
+        prev1 = next
+      }
+
+      return prev1
+    }
+
+    solution(7)
+    console.log('next part')
+    solution(20)
+
+    console.log(
+      '_________________________Cheap Letter Deletion_______________________',
+    )
+    console.log(cheapLetterDeletion('abccbd', [0, 1, 2, 3, 4, 5]))
+    console.log(cheapLetterDeletion('aabbcc', [1, 2, 1, 2, 1, 2]))
+    console.log(cheapLetterDeletion('aaaa', [3, 4, 5, 6]))
+    console.log(cheapLetterDeletion('ababa', [10, 5, 10, 5, 10]))
+
+    console.log('________________Task description_____________________')
+    console.log(taskDescription(2))
+    console.log(taskDescription(6))
+    console.log(taskDescription(10))
+  </script>
+</html>

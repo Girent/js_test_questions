@@ -1,0 +1,42 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.outer-centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.outer-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.outer-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.outer-centered .inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.outer-left .inner {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+
+.outer-right .inner {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  text-align: end;
+}
