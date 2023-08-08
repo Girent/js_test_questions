@@ -126,7 +126,7 @@
 
       for (let i = 1; i < N; i++) {
         if (L[i] === L[i - 1]) {
-          total_cost += Math.min(C[i - 1], C[i])
+          total_cost += C[i - 1]
         }
       }
 
@@ -134,19 +134,30 @@
     }
 
     function taskDescription(N) {
-      if (N === 0) return 0
-      if (N === 1) return 1
-
-      let prev1 = 1
-      let prev2 = 0
-
-      for (let i = 2; i <= N; i++) {
-        const next = (prev1 + prev2) % 10
-        prev2 = prev1
-        prev1 = next
+      if (N === 0) {
+        return [0]
+      } else if (N === 1) {
+        return [0, 1]
       }
 
-      return prev1
+      let sequence = [0, 1]
+      for (let i = 2; i <= N; i++) {
+        let sum
+        if (sequence[i - 1] < 10 && sequence[i - 2] < 10) {
+          sum = sequence[i - 1] + sequence[i - 2]
+        } else {
+          let digits = sequence[i - 1].toString().split('').map(Number)
+          let digitsSeqLast = sequence[i - 2].toString().split('').map(Number)
+
+          sum =
+            digits.reduce((a, b) => a + b, 0) +
+            digitsSeqLast.reduce((a, b) => a + b, 0)
+        }
+
+        sequence.push(sum)
+      }
+
+      return sequence[N]
     }
 
     solution(7)
@@ -160,10 +171,13 @@
     console.log(cheapLetterDeletion('aabbcc', [1, 2, 1, 2, 1, 2]))
     console.log(cheapLetterDeletion('aaaa', [3, 4, 5, 6]))
     console.log(cheapLetterDeletion('ababa', [10, 5, 10, 5, 10]))
+    console.log(cheapLetterDeletion('aaaa', [5, 1, 1, 5]))
+    console.log(cheapLetterDeletion('aafaa', [5, 1, 5, 1, 5]))
 
     console.log('________________Task description_____________________')
     console.log(taskDescription(2))
     console.log(taskDescription(6))
     console.log(taskDescription(10))
+    console.log(taskDescription(13))
   </script>
 </html>
